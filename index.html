@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+    <title>Tokini</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com" rel="preconnect"/>
+    <link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;700;800&display=swap" rel="stylesheet"/>
+    <script>
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              colors: {
+                "primary": "#13a4ec",
+                "background-light": "#f6f7f8",
+                "background-dark": "#101c22",
+                "foreground-light": "#111827",
+                "foreground-dark": "#f9fafb",
+                "card-light": "#ffffff",
+                "card-dark": "#1f2937",
+                "border-light": "#e5e7eb",
+                "border-dark": "#374151",
+                "muted-light": "#6b7280",
+                "muted-dark": "#9ca3af",
+              },
+              fontFamily: {
+                "display": ["Plus Jakarta Sans", "sans-serif"]
+              },
+              borderRadius: {
+                "DEFAULT": "0.5rem",
+                "lg": "1rem",
+                "xl": "1.5rem",
+                "full": "9999px"
+              },
+              boxShadow: {
+                'soft': '0 4px 6px -1px rgb(0 0 0 / 0.05), 0 2px 4px -2px rgb(0 0 0 / 0.05)',
+                'soft-lg': '0 10px 15px -3px rgb(0 0 0 / 0.05), 0 4px 6px -4px rgb(0 0 0 / 0.05)',
+              },
+              keyframes: {
+                diceRoll: {
+                  '0%': { 
+                    transform: 'rotate(0deg) scale(1) translateY(0px)',
+                    filter: 'brightness(1) drop-shadow(0 0 0px rgba(19, 164, 236, 0))'
+                  },
+                  '5%': { 
+                    transform: 'rotate(-15deg) scale(1.05) translateY(-5px)',
+                    filter: 'brightness(1.1) drop-shadow(0 0 10px rgba(19, 164, 236, 0.3))'
+                  },
+                  '10%': { 
+                    transform: 'rotate(25deg) scale(1.1) translateY(-10px)',
+                    filter: 'brightness(1.2) drop-shadow(0 0 15px rgba(19, 164, 236, 0.5))'
+                  },
+                  '15%': { 
+                    transform: 'rotate(-35deg) scale(1.15) translateY(-15px)',
+                    filter: 'brightness(1.3) drop-shadow(0 0 20px rgba(19, 164, 236, 0.7))'
+                  },
+                  '20%': { 
+                    transform: 'rotate(45deg) scale(1.2) translateY(-20px)',
+                    filter: 'brightness(1.4) drop-shadow(0 0 25px rgba(19, 164, 236, 0.8))'
+                  },
+                  '25%': { 
+                    transform: 'rotate(-55deg) scale(1.25) translateY(-25px)',
+                    filter: 'brightness(1.5) drop-shadow(0 0 30px rgba(19, 164, 236, 0.9))'
+                  },
+                  '30%': { 
+                    transform: 'rotate(65deg) scale(1.3) translateY(-30px)',
+                    filter: 'brightness(1.6) drop-shadow(0 0 35px rgba(19, 164, 236, 1))'
+                  },
+                  '35%': { 
+                    transform: 'rotate(-75deg) scale(1.35) translateY(-35px)',
+                    filter: 'brightness(1.7) drop-shadow(0 0 40px rgba(19, 164, 236, 1))'
+                  },
+                  '40%': { 
+                    transform: 'rotate(85deg) scale(1.4) translateY(-40px)',
+                    filter: 'brightness(1.8) drop-shadow(0 0 45px rgba(19, 164, 236, 1))'
+                  },
+                  '45%': { 
+                    transform: 'rotate(-95deg) scale(1.45) translateY(-45px)',
+                    filter: 'brightness(1.9) drop-shadow(0 0 50px rgba(19, 164, 236, 1))'
+                  },
+                  '50%': { 
+                    transform: 'rotate(105deg) scale(1.5) translateY(-50px)',
+                    filter: 'brightness(2) drop-shadow(0 0 55px rgba(19, 164, 236, 1))'
+                  },
+                  '55%': { 
+                    transform: 'rotate(-115deg) scale(1.45) translateY(-45px)',
+                    filter: 'brightness(1.9) drop-shadow(0 0 50px rgba(19, 164, 236, 1))'
+                  },
+                  '60%': { 
+                    transform: 'rotate(125deg) scale(1.4) translateY(-40px)',
+                    filter: 'brightness(1.8) drop-shadow(0 0 45px rgba(19, 164, 236, 1))'
+                  },
+                  '65%': { 
+                    transform: 'rotate(-135deg) scale(1.35) translateY(-35px)',
+                    filter: 'brightness(1.7) drop-shadow(0 0 40px rgba(19, 164, 236, 1))'
+                  },
+                  '70%': { 
+                    transform: 'rotate(145deg) scale(1.3) translateY(-30px)',
+                    filter: 'brightness(1.6) drop-shadow(0 0 35px rgba(19, 164, 236, 1))'
+                  },
+                  '75%': { 
+                    transform: 'rotate(-155deg) scale(1.25) translateY(-25px)',
+                    filter: 'brightness(1.5) drop-shadow(0 0 30px rgba(19, 164, 236, 0.9))'
+                  },
+                  '80%': { 
+                    transform: 'rotate(165deg) scale(1.2) translateY(-20px)',
+                    filter: 'brightness(1.4) drop-shadow(0 0 25px rgba(19, 164, 236, 0.8))'
+                  },
+                  '85%': { 
+                    transform: 'rotate(-175deg) scale(1.15) translateY(-15px)',
+                    filter: 'brightness(1.3) drop-shadow(0 0 20px rgba(19, 164, 236, 0.7))'
+                  },
+                  '90%': { 
+                    transform: 'rotate(185deg) scale(1.1) translateY(-10px)',
+                    filter: 'brightness(1.2) drop-shadow(0 0 15px rgba(19, 164, 236, 0.5))'
+                  },
+                  '95%': { 
+                    transform: 'rotate(-195deg) scale(1.05) translateY(-5px)',
+                    filter: 'brightness(1.1) drop-shadow(0 0 10px rgba(19, 164, 236, 0.3))'
+                  },
+                  '100%': { 
+                    transform: 'rotate(0deg) scale(1) translateY(0px)',
+                    filter: 'brightness(1) drop-shadow(0 0 0px rgba(19, 164, 236, 0))'
+                  }
+                },
+                diceBounce: {
+                  '0%': { transform: 'scale(1) translateY(0px)' },
+                  '50%': { transform: 'scale(1.1) translateY(-10px)' },
+                  '100%': { transform: 'scale(1) translateY(0px)' }
+                },
+              },
+              animation: {
+                diceRoll: 'diceRoll 2s cubic-bezier(0.25, 0.46, 0.45, 0.94)',
+                diceBounce: 'diceBounce 0.6s ease-in-out'
+              }
+            },
+          },
+        }
+      </script>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet"/>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#13a4ec">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="default">
+    <meta name="apple-mobile-web-app-title" content="Tokini">
+    <style>
+        body {
+          min-height: max(884px, 100dvh);
+        }
+        .animate-dice:active ~ .dice-container > .dice {
+            animation-name: diceRoll;
+            animation-duration: 2s;
+            animation-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .dice-rolling {
+            animation: diceRoll 2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+        .dice-bounce {
+            animation: diceBounce 0.6s ease-in-out;
+        }
+        .dice-container {
+            position: relative;
+        }
+        .dice {
+            transition: all 0.3s ease;
+        }
+        .dice:hover {
+            transform: scale(1.05);
+            filter: drop-shadow(0 0 20px rgba(19, 164, 236, 0.3));
+        }
+      </style>
+</head>
+<body class="bg-background-light dark:bg-background-dark font-display text-foreground-light dark:text-foreground-dark">
+    <div class="container mx-auto max-w-lg min-h-screen flex flex-col p-4">
+        <header class="text-center py-6 relative">
+            <button 
+                id="themeToggle" 
+                class="absolute top-0 right-0 p-2 rounded-lg bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark hover:bg-gray-50 dark:hover:bg-gray-700 transition-colors"
+                title="Toggle dark mode"
+            >
+                <span class="material-symbols-outlined text-foreground-light dark:text-foreground-dark" id="themeIcon">
+                    dark_mode
+                </span>
+            </button>
+            <h1 class="text-2xl font-bold text-foreground-light dark:text-foreground-dark">Tokini</h1>
+            <p class="text-sm text-muted-light dark:text-muted-dark mt-2">Enter options and let the app decide for you!</p>
+        </header>
+        
+        <main class="flex-grow flex flex-col items-center gap-8">
+            <div class="w-full space-y-4">
+                <div class="flex gap-2">
+                    <input 
+                        id="optionInput"
+                        class="flex-grow bg-card-light dark:bg-card-dark border border-border-light dark:border-border-dark rounded-lg px-4 py-3 focus:ring-2 focus:ring-primary focus:border-primary placeholder:text-muted-light dark:placeholder:text-muted-dark" 
+                        placeholder="Add an option" 
+                        type="text"
+                    />
+                    <button id="addButton" class="bg-primary text-white font-bold px-6 py-3 rounded-lg shadow-soft hover:opacity-90 transition-opacity">
+                        Add ✅
+                    </button>
+                </div>
+                
+                <div class="bg-card-light dark:bg-card-dark rounded-xl shadow-soft p-4 space-y-2 max-h-48 overflow-y-auto">
+                    <h2 class="text-lg font-bold mb-2">Options</h2>
+                    <div id="optionsList" class="space-y-2">
+                        <!-- Options will be added here dynamically -->
+                    </div>
+                </div>
+            </div>
+            
+            <div class="flex-grow flex flex-col justify-center items-center gap-8 w-full">
+                <div class="relative">
+                    <button id="rollButton" class="animate-dice absolute w-48 h-48 rounded-xl z-10 opacity-0 cursor-pointer"></button>
+                    <div class="dice-container">
+                        <div class="dice w-48 h-48 bg-card-light dark:bg-card-dark rounded-xl shadow-soft-lg flex items-center justify-center text-8xl transition-transform duration-200">
+                            🎲
+                        </div>
+                    </div>
+                </div>
+                
+                <div id="resultArea" class="text-center h-16">
+                    <!-- Result will be displayed here -->
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
