@@ -16,6 +16,7 @@ class Tokini {
         this.resultArea = document.getElementById('resultArea');
         this.themeToggle = document.getElementById('themeToggle');
         this.themeIcon = document.getElementById('themeIcon');
+        this.clearButton = document.getElementById('clearButton');
     }
 
     bindEvents() {
@@ -37,6 +38,9 @@ class Tokini {
 
         // Theme toggle
         this.themeToggle.addEventListener('click', () => this.toggleTheme());
+
+        // Clear all options
+        this.clearButton.addEventListener('click', () => this.clearAllOptions());
     }
 
     addOption() {
@@ -72,6 +76,9 @@ class Tokini {
         
         // Enable roll button if we have at least 2 options
         this.updateRollButton();
+        
+        // Show/hide clear button
+        this.updateClearButton();
     }
 
     removeOption(index) {
@@ -79,6 +86,7 @@ class Tokini {
         this.renderOptions();
         this.clearResult();
         this.updateRollButton();
+        this.updateClearButton();
     }
 
     renderOptions() {
@@ -131,8 +139,9 @@ class Tokini {
         
         // Add some suspense with a delay
         setTimeout(() => {
-            const randomIndex = Math.floor(Math.random() * this.options.length);
-            const chosenOption = this.options[randomIndex];
+            // Use Fisher-Yates shuffle to select a truly random option
+            const shuffledOptions = this.fisherYatesShuffle([...this.options]);
+            const chosenOption = shuffledOptions[0];
             
             // Stop rolling and show final result
             this.stopDiceRoll(dice, diceContainer, chosenOption);
@@ -149,11 +158,11 @@ class Tokini {
             clearInterval(this.continuousShuffleInterval);
         }
         
-        // Start changing dice faces rapidly
+        // Start changing dice faces rapidly with Fisher-Yates shuffle
         this.diceRollInterval = setInterval(() => {
             const diceFaces = ['🎲', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-            const randomFace = diceFaces[Math.floor(Math.random() * diceFaces.length)];
-            dice.textContent = randomFace;
+            const shuffledFaces = this.fisherYatesShuffle([...diceFaces]);
+            dice.textContent = shuffledFaces[0];
         }, 100); // Change face every 100ms for fast rolling effect
     }
 
@@ -167,10 +176,10 @@ class Tokini {
         dice.classList.remove('dice-rolling');
         dice.classList.add('dice-bounce');
         
-        // Set final dice face based on the result
+        // Set final dice face using Fisher-Yates shuffle
         const diceFaces = ['🎲', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-        const finalFace = diceFaces[Math.floor(Math.random() * diceFaces.length)];
-        dice.textContent = finalFace;
+        const shuffledFaces = this.fisherYatesShuffle([...diceFaces]);
+        dice.textContent = shuffledFaces[0];
         
         // Display result
         this.displayResult(chosenOption);
@@ -195,15 +204,25 @@ class Tokini {
     }
 
     startContinuousShuffle() {
-        // Start continuous shuffling of dice faces
+        // Start continuous shuffling of dice faces with Fisher-Yates shuffle
         this.continuousShuffleInterval = setInterval(() => {
             const dice = document.querySelector('.dice');
             if (dice && !dice.classList.contains('dice-rolling')) {
                 const diceFaces = ['🎲', '⚀', '⚁', '⚂', '⚃', '⚄', '⚅'];
-                const randomFace = diceFaces[Math.floor(Math.random() * diceFaces.length)];
-                dice.textContent = randomFace;
+                const shuffledFaces = this.fisherYatesShuffle([...diceFaces]);
+                dice.textContent = shuffledFaces[0];
             }
         }, 800); // Change face every 800ms for gentle shuffling
+    }
+
+    // Fisher-Yates shuffle algorithm (Python-style implementation)
+    fisherYatesShuffle(array) {
+        const shuffled = [...array];
+        for (let i = shuffled.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+        }
+        return shuffled;
     }
 
     clearIntervals() {
@@ -230,6 +249,35 @@ class Tokini {
     updateRollButton() {
         // The roll button is always enabled in this design
         // The dice animation will handle the visual feedback
+    }
+
+    updateClearButton() {
+        if (this.options.length > 0) {
+            this.clearButton.style.display = 'block';
+        } else {
+            this.clearButton.style.display = 'none';
+        }
+    }
+
+    clearAllOptions() {
+        if (this.options.length === 0) return;
+        
+        // Show confirmation for clearing all options
+        if (confirm(`Are you sure you want to clear all ${this.options.length} options?`)) {
+            this.options = [];
+            this.renderOptions();
+            this.clearResult();
+            this.updateClearButton();
+            
+            // Track clear event
+            if (window.va) {
+                window.va('track', 'options_cleared', {
+                    cleared_count: this.options.length
+                });
+            }
+            
+            this.showTemporaryMessage('All options cleared!', 'info');
+        }
     }
 
     showTemporaryMessage(message, type = 'info') {

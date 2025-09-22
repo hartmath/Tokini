@@ -204,7 +204,16 @@
                 </div>
                 
                 <div class="bg-card-light dark:bg-card-dark rounded-xl shadow-soft p-4 space-y-2 max-h-48 overflow-y-auto">
-                    <h2 class="text-lg font-bold mb-2">Options</h2>
+                    <div class="flex justify-between items-center mb-2">
+                        <h2 class="text-lg font-bold">Options</h2>
+                        <button 
+                            id="clearButton" 
+                            class="text-sm bg-red-100 dark:bg-red-900 text-red-700 dark:text-red-300 px-3 py-1 rounded-lg hover:bg-red-200 dark:hover:bg-red-800 transition-colors font-medium"
+                            style="display: none;"
+                        >
+                            Clear All 🗑️
+                        </button>
+                    </div>
                     <div id="optionsList" class="space-y-2">
                         <!-- Options will be added here dynamically -->
                     </div>
