@@ -63,6 +63,13 @@ class Tokini {
         this.optionInput.focus();
         this.clearResult();
         
+        // Track option added event
+        if (window.va) {
+            window.va('track', 'option_added', {
+                total_options: this.options.length
+            });
+        }
+        
         // Enable roll button if we have at least 2 options
         this.updateRollButton();
     }
@@ -168,6 +175,14 @@ class Tokini {
         // Display result
         this.displayResult(chosenOption);
         
+        // Track decision event with Vercel Analytics
+        if (window.va) {
+            window.va('track', 'decision_made', {
+                option: chosenOption,
+                total_options: this.options.length
+            });
+        }
+        
         // Re-enable roll button after bounce animation
         setTimeout(() => {
             dice.classList.remove('dice-bounce');
@@ -268,10 +283,20 @@ class Tokini {
             document.documentElement.classList.remove('dark');
             this.themeIcon.textContent = 'dark_mode';
             localStorage.setItem('tokini-theme', 'light');
+            
+            // Track theme change
+            if (window.va) {
+                window.va('track', 'theme_changed', { theme: 'light' });
+            }
         } else {
             document.documentElement.classList.add('dark');
             this.themeIcon.textContent = 'light_mode';
             localStorage.setItem('tokini-theme', 'dark');
+            
+            // Track theme change
+            if (window.va) {
+                window.va('track', 'theme_changed', { theme: 'dark' });
+            }
         }
     }
 

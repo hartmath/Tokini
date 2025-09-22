@@ -229,5 +229,19 @@
     </div>
 
     <script src="script.js"></script>
+    <script>
+        // Vercel Analytics
+        (function() {
+            var script = document.createElement('script');
+            script.src = 'https://cdn.vercel-insights.com/v1/script.debug.js';
+            script.defer = true;
+            script.onload = function() {
+                window.va && window.va('init', {
+                    endpoint: 'https://vitals.vercel-insights.com/v1/vitals'
+                });
+            };
+            document.head.appendChild(script);
+        })();
+    </script>
 </body>
 </html>

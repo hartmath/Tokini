@@ -1,0 +1,23 @@
+{
+  "name": "dicision-app",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hartmath/Tokini.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hartmath/Tokini/issues"
+  },
+  "homepage": "https://github.com/hartmath/Tokini#readme",
+  "dependencies": {
+    "@vercel/analytics": "^1.5.0"
+  }
+}
